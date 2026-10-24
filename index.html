@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dr. Ayşe Demir | Medikal Estetik</title>
-<meta name="description" content="Dr. Ayşe Demir – Medikal estetik uzmanı. Dolgu, botoks ve mezoterapi uygulamalarında doğal ve dengeli sonuçlar.">
+<title>Dr. Figen Uysal | Medikal Estetik</title>
+<meta name="description" content="Dr. Figen Uysal – Medikal estetik uzmanı. Dolgu, botoks ve mezoterapi uygulamalarında doğal ve dengeli sonuçlar.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
       colors: {
         sand: { 50:'#FAF6F1', 100:'#F1E9DF', 200:'#E6D9C9', 300:'#D5C2AB' },
         dust: { 300:'#D4A5A5', 400:'#C08A8C', 500:'#A8636A', 600:'#8B4D55' },
-        ink: '#2A2A2D'
+        ink: '#221E1D'
       },
       fontFamily: { display:['Fraunces','Georgia','serif'], sans:['"Hanken Grotesk"','system-ui','sans-serif'] }
     } }
@@ -27,7 +27,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<script>setTimeout(function(){var l=document.getElementById('loader');if(l)l.remove();},6000);</script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>setTimeout(function(){var l=document.getElementById('loader');if(l)l.remove();},9000);</script>
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
@@ -36,8 +37,8 @@
 </script>
 
 <style>
-  html { scroll-behavior:smooth; }
-  body { font-family:'Hanken Grotesk',system-ui,sans-serif; background:#FAF6F1; color:#2A2A2D; -webkit-font-smoothing:antialiased; }
+  html { scroll-behavior:auto; }
+  body { font-family:'Hanken Grotesk',system-ui,sans-serif; background:#FAF6F1; color:#221E1D; -webkit-font-smoothing:antialiased; }
   :focus-visible { outline:2px solid #A8636A; outline-offset:3px; border-radius:6px; }
 
   /* 3D sahne işaretleri */
@@ -55,24 +56,49 @@
   .ba .cap { transition:transform .5s cubic-bezier(.2,.7,.2,1), opacity .5s; transform:translateY(8px); opacity:0; }
   .ba:hover .cap, .ba:focus-within .cap { transform:translateY(0); opacity:1; }
 
-  .chip { font-size:.875rem; padding:.55rem 1.1rem; border-radius:9999px; border:1px solid rgba(42,42,45,.2); transition:all .25s; background:transparent; }
+  .chip { font-size:.875rem; padding:.55rem 1.1rem; border-radius:9999px; border:1px solid rgba(34,30,29,.2); transition:all .25s; background:transparent; }
   .chip:hover { border-color:#A8636A; color:#A8636A; }
-  .chip.is-on { background:#2A2A2D; color:#fff; border-color:#2A2A2D; }
-  .field { display:block; width:100%; margin-top:.4rem; background:#FAF6F1; border:1px solid #E6D9C9; border-radius:.9rem; padding:.85rem 1rem; font-size:.95rem; color:#2A2A2D; transition:border-color .2s, background .2s; }
+  .chip.is-on { background:#221E1D; color:#fff; border-color:#221E1D; }
+  .field { display:block; width:100%; margin-top:.4rem; background:#FAF6F1; border:1px solid #E6D9C9; border-radius:.9rem; padding:.85rem 1rem; font-size:.95rem; color:#221E1D; transition:border-color .2s, background .2s; }
   .field:focus { outline:none; border-color:#A8636A; background:#fff; }
   .soc { display:grid; place-items:center; width:44px; height:44px; border-radius:9999px; border:1px solid rgba(255,255,255,.2); transition:all .25s; }
   .soc:hover { background:#A8636A; border-color:#A8636A; transform:translateY(-2px); }
 
+  html { overscroll-behavior-y:none; scrollbar-width:thin; scrollbar-color:#C08A8C transparent; }
+  .rl { display:inline-flex; flex-direction:column; height:1.3em; line-height:1.3em; overflow:hidden; vertical-align:bottom; }
+  .rl > span { display:block; transition:transform .55s cubic-bezier(.7,0,.2,1); }
+  a:hover .rl > span, button:hover .rl > span, a:focus-visible .rl > span { transform:translateY(-100%); }
+  .shimmer { background:linear-gradient(100deg,#8B4D55 0%,#B8976A 38%,#EAD6AE 50%,#B8976A 62%,#8B4D55 100%); background-size:250% 100%;
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; animation:shim 8s ease-in-out infinite; }
+  @keyframes shim { 0%,100% { background-position:100% 0; } 50% { background-position:0 0; } }
+  #cursor span { position:absolute; inset:0; display:grid; place-items:center; font-size:12px; font-weight:500; color:#8B4D55; opacity:0; transition:opacity .25s; }
+  #cursor.has-txt { width:92px; height:92px; margin:-46px 0 0 -46px; background:rgba(250,246,241,.72); backdrop-filter:blur(6px); }
+  #cursor.has-txt span { opacity:1; }
+  .prin { position:relative; }
+  .prin::before { content:''; position:absolute; inset:-1.25rem; border-radius:1.5rem; pointer-events:none; opacity:0; transition:opacity .4s;
+    background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(168,99,106,.11), transparent 70%); }
+  .prin:hover::before { opacity:1; }
+  @media (prefers-reduced-motion: reduce) { .shimmer { animation:none; } }
+  h1 > .block { padding:.14em .14em .16em 0; margin:-.14em 0 -.16em; }
+  .font-display { font-optical-sizing:auto; }
+  ::selection { background:#A8636A; color:#fff; }
+  html.lenis, html.lenis body { height:auto; }
+  .lenis.lenis-smooth { scroll-behavior:auto !important; }
+  .lenis.lenis-stopped { overflow:hidden; }
+  .grain { position:fixed; inset:0; pointer-events:none; z-index:80; opacity:.045;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  #cursor { position:fixed; left:0; top:0; width:34px; height:34px; margin:-17px 0 0 -17px; border:1px solid rgba(168,99,106,.85); border-radius:50%;
+    pointer-events:none; z-index:85; transform:translate(-100px,-100px); transition:width .35s, height .35s, margin .35s, background .35s; }
+  #cursor.is-hot { width:68px; height:68px; margin:-34px 0 0 -34px; background:rgba(168,99,106,.12); }
+  .marquee { display:flex; width:max-content; animation:marq 42s linear infinite; }
+  @keyframes marq { to { transform:translateX(-50%); } }
+  .diamond { display:inline-block; width:9px; height:9px; border:1.2px solid #B8976A; transform:rotate(45deg); align-self:center; flex:none; }
+  @media (prefers-reduced-motion: reduce) { .marquee { animation:none; } }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .mk i::after { animation:none; } }
 </style>
 </head>
 
 <body>
-
-<!-- Yükleniyor -->
-<div id="loader" class="fixed inset-0 z-[70] grid place-items-center bg-sand-100 transition-opacity duration-700">
-  <p class="font-display text-2xl text-ink/70">Klinik hazırlanıyor…</p>
-</div>
 
 <!-- 3D SAHNE (tüm sayfa boyunca sabit) -->
 <div id="glwrap" class="fixed inset-0 z-0">
@@ -82,10 +108,13 @@
 <div id="markers"></div>
 <svg id="lines" class="fixed inset-0 w-full h-full pointer-events-none" style="z-index:6"><g id="lineg"></g></svg>
 
+<div class="grain" aria-hidden="true"></div>
+<div id="sp" class="fixed top-0 left-0 right-0 h-[2px] z-[60] origin-left bg-gradient-to-r from-dust-400 via-[#C9A877] to-dust-500" style="transform:scaleX(0)"></div>
+
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
   <div class="mx-auto max-w-7xl px-5 md:px-8 h-[68px] flex items-center justify-between">
-    <a href="#hero" class="font-display text-xl tracking-tight">Dr. Ayşe Demir</a>
+    <a href="#hero" class="font-display text-xl tracking-tight">Dr. Figen Uysal</a>
     <nav class="hidden md:flex items-center gap-8 text-sm text-ink/75">
       <a href="#story" class="hover:text-dust-500 transition-colors">İşlemler</a>
       <a href="#galeri" class="hover:text-dust-500 transition-colors">Sonuçlar</a>
@@ -93,7 +122,7 @@
     </nav>
     <a href="#iletisim" class="text-sm font-medium bg-ink text-white rounded-full px-5 py-2.5 hover:bg-dust-500 transition-colors">Randevu al</a>
   </div>
-  <div class="absolute inset-0 -z-10 bg-sand-50/55 backdrop-blur-md border-b border-sand-200/60"></div>
+  <div id="navbg" class="absolute inset-0 -z-10 bg-sand-50/92 border-b border-sand-200/60 opacity-0 transition-opacity duration-500"></div>
 </header>
 
 <main>
@@ -107,8 +136,8 @@
     <div class="max-w-xl">
       <p class="hero-fade text-dust-600 font-medium text-sm md:text-base">Medikal estetik ve cilt sağlığı uzmanı</p>
       <h1 class="font-display font-light leading-[.98] tracking-[-0.02em] text-[clamp(3.2rem,8.5vw,7rem)] mt-4">
-        <span class="block overflow-hidden"><span class="hero-line block">Dr. Ayşe</span></span>
-        <span class="block overflow-hidden"><span class="hero-line block italic text-dust-500">Demir</span></span>
+        <span class="block overflow-hidden"><span class="hero-line block">Dr. Figen</span></span>
+        <span class="block overflow-hidden"><span class="hero-line block italic"><span class="shimmer inline-block pr-[.16em] pl-[.04em]">Uysal</span></span></span>
       </h1>
       <p class="hero-fade mt-6 max-w-md text-base md:text-lg text-ink/75 leading-relaxed">
         Her yüz için ayrı planlanan, abartısız ve dengeli estetik uygulamalar. Kaydırın, uygulamaları yüz üzerinde birlikte görelim.
@@ -123,12 +152,15 @@
   <div class="hero-fade absolute left-1/2 -translate-x-1/2 bottom-6 hidden md:flex flex-col items-center gap-2 text-xs text-ink/60">
     <span>Kaydırın</span><span class="block w-px h-8 bg-ink/40"></span>
   </div>
+  <p class="hero-fade absolute left-5 md:left-8 bottom-6 hidden md:block text-xs text-ink/55">İstanbul, Şişli</p>
+  <p class="hero-fade absolute right-5 md:right-8 bottom-6 hidden md:block text-xs text-ink/55">Randevu ile kabul</p>
 </section>
 
 <!-- 2. SCROLLYTELLING — kamera yüzde bölge bölge gezer -->
 <section id="story" class="relative z-10 h-[100svh] w-full">
   <div id="intro" class="absolute inset-x-0 top-24 md:top-28 text-center px-6 z-10">
     <h2 class="font-display font-light text-3xl md:text-5xl tracking-tight">Yüzünüzü birlikte okuyalım</h2>
+    <p class="mt-4 text-sm text-ink/60"><span class="md:hidden">Parmağınızı yukarı kaydırarak ilerleyin</span><span class="hidden md:inline">Fare tekerleği veya dokunmatik yüzeyle ilerleyin</span></p>
   </div>
 
   <div id="cards" class="absolute inset-0 z-20 pointer-events-none"></div>
@@ -139,6 +171,22 @@
   <div id="outro" class="absolute inset-x-0 bottom-10 md:bottom-12 z-20 text-center px-6 opacity-0 invisible">
     <p class="font-display text-2xl md:text-4xl font-light max-w-3xl mx-auto">Hangi uygulama size uygun, muayenede birlikte karar verelim.</p>
     <a href="#iletisim" class="inline-block mt-5 bg-ink text-white rounded-full px-7 py-3.5 text-sm font-medium hover:bg-dust-500 transition-colors">Randevu al</a>
+  </div>
+</section>
+
+<!-- YAKLAŞIM -->
+<section id="yaklasim" class="relative z-10 bg-sand-50 rounded-t-[2rem] md:rounded-t-[4rem] pt-28 md:pt-44 pb-24 md:pb-32 overflow-hidden">
+  <div class="mx-auto max-w-6xl px-5 md:px-8">
+    <p id="statement" class="font-display font-light text-[clamp(1.9rem,4.6vw,4rem)] leading-[1.12] tracking-tight text-balance">Amacımız sizi başka biri gibi göstermek değil; olduğunuz kişinin en dinlenmiş, en dengeli halini ortaya çıkarmak.</p>
+
+    <div class="mt-20 md:mt-28 grid md:grid-cols-3 gap-10 md:gap-14 border-t border-ink/15 pt-10">
+      <div class="prin"><p class="font-display text-2xl md:text-3xl font-light">Doğal sonuç</p><p class="mt-3 text-ink/65 leading-relaxed">Mimikleriniz ve yüz oranlarınız korunur. Fark edilen şey yapılmış bir yüz değil, dinlenmiş bir yüz olur.</p></div>
+      <div class="prin"><p class="font-display text-2xl md:text-3xl font-light">Kişiye özel plan</p><p class="mt-3 text-ink/65 leading-relaxed">Her yüz farklıdır. Hangi uygulamanın, ne kadar yapılacağına muayenede birlikte karar veririz.</p></div>
+      <div class="prin"><p class="font-display text-2xl md:text-3xl font-light">Güvenli ortam</p><p class="mt-3 text-ink/65 leading-relaxed">Steril ortam, tek kullanımlık ürünler ve onaylı malzemelerle çalışılır.</p></div>
+    </div>
+  </div>
+  <div class="mt-24 md:mt-32 border-y border-ink/10 py-6 md:py-8 overflow-hidden">
+    <div id="marq" class="marquee font-display font-light text-3xl md:text-6xl text-ink/80 whitespace-nowrap"></div>
   </div>
 </section>
 
@@ -164,7 +212,8 @@
 
 <!-- 4. İLETİŞİM -->
 <section id="iletisim" class="relative z-10 py-24 md:py-32 bg-ink text-white overflow-hidden">
-  <div class="absolute -left-32 -top-32 w-[500px] h-[500px] rounded-full bg-dust-600/25 blur-3xl"></div>
+  <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#B8976A]/60 to-transparent"></div>
+  <div id="blob" class="absolute -left-32 -top-32 w-[500px] h-[500px] rounded-full bg-dust-600/25 blur-3xl"></div>
   <div class="relative mx-auto max-w-7xl px-5 md:px-8 grid lg:grid-cols-2 gap-16">
 
     <div>
@@ -174,7 +223,7 @@
       <dl class="mt-12 space-y-7 text-sm md:text-base">
         <div><dt class="text-white/45 text-sm">Klinik adresi</dt><dd class="mt-1.5">Örnek Mahallesi, Güzellik Sokağı No: 12/4<br>Şişli, İstanbul</dd></div>
         <div><dt class="text-white/45 text-sm">Telefon</dt><dd class="mt-1.5"><a href="tel:+905550000000" class="hover:text-dust-300 transition-colors">+90 555 000 00 00</a></dd></div>
-        <div><dt class="text-white/45 text-sm">E-posta</dt><dd class="mt-1.5"><a href="mailto:info@draysedemir.com" class="hover:text-dust-300 transition-colors">info@draysedemir.com</a></dd></div>
+        <div><dt class="text-white/45 text-sm">E-posta</dt><dd class="mt-1.5"><a href="mailto:info@drfigenuysal.com" class="hover:text-dust-300 transition-colors">info@drfigenuysal.com</a></dd></div>
         <div><dt class="text-white/45 text-sm">Çalışma saatleri</dt><dd class="mt-1.5">Pazartesi – Cumartesi, 10.00 – 19.00</dd></div>
       </dl>
 
@@ -219,13 +268,14 @@
         <input type="checkbox" name="kvkk" required class="mt-1 accent-[#A8636A]">
         <span>Kişisel verilerimin randevu iletişimi amacıyla işlenmesini kabul ediyorum.</span>
       </label>
-      <button type="submit" class="w-full bg-dust-500 hover:bg-dust-600 text-white font-medium rounded-full py-4 transition-colors">Randevu talebini gönder</button>
+      <button type="submit" class="w-full bg-ink hover:bg-dust-600 text-white font-medium rounded-full py-4 transition-colors">Randevu talebini gönder</button>
       <p id="formMsg" class="text-sm text-dust-600 min-h-[1.25rem]" role="status" aria-live="polite"></p>
     </form>
   </div>
 
-  <div class="relative mx-auto max-w-7xl px-5 md:px-8 mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between gap-3 text-sm text-white/45">
-    <p>© <span id="yil"></span> Dr. Ayşe Demir. Tüm hakları saklıdır.</p>
+  <p id="bigname" class="relative mt-20 font-display font-light leading-none tracking-tighter text-[clamp(3rem,11.5vw,12rem)] text-white/[.07] select-none whitespace-nowrap overflow-hidden pb-[.12em] px-5 md:px-8" aria-hidden="true">Dr. Figen Uysal</p>
+  <div class="relative mx-auto max-w-7xl px-5 md:px-8 mt-10 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between gap-3 text-sm text-white/45">
+    <p>© <span id="yil"></span> Dr. Figen Uysal. Tüm hakları saklıdır.</p>
     <p>Bu sayfadaki bilgiler genel bilgilendirme amaçlıdır, tıbbi tavsiye yerine geçmez.</p>
   </div>
 </section>
@@ -236,12 +286,45 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const mob = () => window.innerWidth < 768;
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
+/* KAYDIRMA HIZI: sayısı büyürse sahne uzar (yavaşlar), küçülürse kısalır (hızlanır). Birim: ekran yüksekliği */
+const PACE = { desktop: 15, mobile: 13 };
 $('#yil').textContent = new Date().getFullYear();
+
+/* ============================================================
+   PREMIUM KATMAN: yumuşak kaydırma, perde, imleç, mıknatıs
+   ============================================================ */
+const fine = matchMedia('(pointer:fine)').matches;
+const touch = matchMedia('(pointer:coarse)').matches;
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let lenis = null;
+if (window.Lenis && !reduceMotion && fine) {
+  lenis = new Lenis({ lerp: .2, wheelMultiplier: .7, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const id = a.getAttribute('href'); const el = id.length > 1 ? $(id) : null;
+  if (!el) return; e.preventDefault();
+  if (lenis) lenis.scrollTo(el, { duration: 1.8 }); else el.scrollIntoView({ behavior:'smooth' });
+}));
+
+const heroIntro = gsap.timeline({ paused:true, defaults:{ ease:'power3.out' } })
+  .from('.hero-line', { yPercent:135, duration:1.2, stagger:.13 })
+  .from('.hero-fade', { y:20, opacity:0, duration:.9, stagger:.1 }, '-=.7');
+let loaderGone = false;
+function hideLoader() {
+  if (loaderGone) return; loaderGone = true;
+  heroIntro.play();
+}
 
 /* ============================================================
    İÇERİK — metinleri buradan değiştirebilirsiniz
@@ -297,7 +380,7 @@ const hsA = steps.map(() => ({ v: 0 }));
    ============================================================ */
 $('#cards').innerHTML = steps.map((s, i) => `
   <div class="card-wrap absolute inset-0 flex items-end md:items-center justify-center ${i % 2 === 0 ? 'md:justify-end' : 'md:justify-start'} px-4 pb-14 md:pb-0 md:px-[6vw] invisible">
-    <article class="pointer-events-auto w-full max-w-[340px] md:max-w-[272px] bg-white/80 backdrop-blur-xl border border-white rounded-2xl p-4 shadow-[0_24px_60px_-30px_rgba(42,42,45,.5)]">
+    <article class="pointer-events-auto w-full max-w-[340px] md:max-w-[272px] bg-white/90 border border-white/70 rounded-2xl p-4 shadow-[0_24px_60px_-30px_rgba(34,30,29,.5),inset_0_1px_0_rgba(255,255,255,.8)]">
       <p class="text-dust-500 text-xs font-medium">${s.region}</p>
       <h3 class="font-display font-light text-2xl tracking-tight leading-tight mt-0.5">${s.title}</h3>
       <p class="mt-2 text-[13px] text-ink/70 leading-snug">${s.desc}</p>
@@ -344,7 +427,7 @@ $$('.ba').forEach(card => {
   const range = $('.ba-range', card), before = $('.before', card), line = $('.line', card);
   range.addEventListener('input', () => { before.style.clipPath = `inset(0 ${100 - range.value}% 0 0)`; line.style.left = range.value + '%'; });
 });
-gsap.from('.ba', { y:60, opacity:0, duration:.9, ease:'power3.out', stagger:.12, scrollTrigger:{ trigger:'#gallery', start:'top 82%' } });
+gsap.from('.ba', { y:70, opacity:0, clipPath:'inset(0 0 100% 0 round 24px)', duration:1.3, ease:'power4.out', stagger:.14, clearProps:'clipPath', scrollTrigger:{ trigger:'#gallery', start:'top 85%' } });
 
 $$('#filters .chip').forEach(btn => btn.addEventListener('click', () => {
   $$('#filters .chip').forEach(b => b.classList.remove('is-on'));
@@ -372,10 +455,6 @@ $('#randevuForm').addEventListener('submit', e => {
   f.reset();
 });
 
-/* Hero giriş animasyonu */
-gsap.timeline({ defaults:{ ease:'power3.out' }, delay:.5 })
-  .from('.hero-line', { yPercent:110, duration:1.1, stagger:.13 })
-  .from('.hero-fade', { y:20, opacity:0, duration:.8, stagger:.1 }, '-=.6');
 
 /* ============================================================
    3D SAHNE
@@ -383,7 +462,9 @@ gsap.timeline({ defaults:{ ease:'power3.out' }, delay:.5 })
 function init3D() {
   const canvas = $('#gl');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, powerPreference:'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+  let pr = Math.min(window.devicePixelRatio, mob() ? 1.25 : 1.5);
+  renderer.setPixelRatio(pr);
+  const perf = { n:0, t0:0 };
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
@@ -417,11 +498,11 @@ function init3D() {
   }
   function hairTex() {
     const c = document.createElement('canvas'); c.width = 1024; c.height = 512;
-    const g = c.getContext('2d'); g.fillStyle = '#46291d'; g.fillRect(0, 0, 1024, 512);
+    const g = c.getContext('2d'); g.fillStyle = '#c9a063'; g.fillRect(0, 0, 1024, 512);
     for (let i = 0; i < 3200; i++) {
       const x = Math.random() * 1024, l = 60 + Math.random() * 400, y = Math.random() * (512 - l);
       const warm = Math.random();
-      g.strokeStyle = `rgba(${Math.round(40 + warm*110)},${Math.round(22 + warm*62)},${Math.round(14 + warm*36)},${.25 + Math.random()*.4})`;
+      g.strokeStyle = `rgba(${Math.round(150 + warm*100)},${Math.round(112 + warm*100)},${Math.round(62 + warm*95)},${.25 + Math.random()*.4})`;
       g.lineWidth = .6 + Math.random() * 1.4;
       g.beginPath(); g.moveTo(x, y); g.lineTo(x + (Math.random() - .5) * 6, y + l); g.stroke();
     }
@@ -439,16 +520,16 @@ function init3D() {
   /* ---------- malzemeler ---------- */
   const skinBump = noiseTex(512, 110, 8);
   const skin = new THREE.MeshPhysicalMaterial({ color:'#e9b99f', roughness:.5, bumpMap:skinBump, bumpScale:.35,
-    sheen:.6, sheenRoughness:.5, sheenColor:new THREE.Color('#ff9f90'), clearcoat:.12, clearcoatRoughness:.45 });
+    sheen:.6, sheenRoughness:.5, sheenColor:new THREE.Color('#ff9f90') });
   const lidMat  = new THREE.MeshPhysicalMaterial({ color:'#d9a091', roughness:.5, sheen:.5, sheenColor:new THREE.Color('#ff9f90') });
   const lipMat  = new THREE.MeshPhysicalMaterial({ color:'#c0696a', roughness:.33, clearcoat:.55, clearcoatRoughness:.25 });
   const darkMat = new THREE.MeshStandardMaterial({ color:'#7e4646', roughness:.6 });
-  const lashMat = new THREE.MeshStandardMaterial({ color:'#1f1411', roughness:.6 });
-  const browMat = new THREE.MeshStandardMaterial({ color:'#3a261c', roughness:.85 });
+  const lashMat = new THREE.MeshStandardMaterial({ color:'#4a3426', roughness:.6 });
+  const browMat = new THREE.MeshStandardMaterial({ color:'#8a6a45', roughness:.85 });
   const hTex = hairTex();
   const hairMat = new THREE.MeshPhysicalMaterial({ color:'#ffffff', map:hTex, bumpMap:hTex, bumpScale:.6, roughness:.42,
-    sheen:1, sheenColor:new THREE.Color('#c98a5a'), sheenRoughness:.4, clearcoat:.15 });
-  const strandMat = new THREE.MeshPhysicalMaterial({ color:'#3b2418', roughness:.4, sheen:1, sheenColor:new THREE.Color('#b8794d'), clearcoat:.2 });
+    sheen:1, sheenColor:new THREE.Color('#fff0c8'), sheenRoughness:.4 });
+  const strandMat = new THREE.MeshPhysicalMaterial({ color:'#c8a263', roughness:.4, sheen:1, sheenColor:new THREE.Color('#ffe9b8') });
   const fabric = new THREE.MeshStandardMaterial({ color:'#f5f0ea', roughness:.93, bumpMap:noiseTex(256, 60, 24), bumpScale:.4, side:THREE.DoubleSide });
   const vinyl  = new THREE.MeshPhysicalMaterial({ color:'#efe6dc', roughness:.38, clearcoat:.35, clearcoatRoughness:.3 });
   const steel  = new THREE.MeshStandardMaterial({ color:'#c9cbce', metalness:1, roughness:.25 });
@@ -659,6 +740,7 @@ function init3D() {
   /* ---------- yastıktaki saç telleri ---------- */
   {
     const rnd = (a, b) => a + Math.random() * (b - a);
+    const strandGeos = [];
     for (let s = 0; s < 120; s++) {
       const x0 = rnd(-.075, .075), z0 = rnd(-.085, .02), L = rnd(.2, .34), ph = rnd(0, 6.28), spread = rnd(.4, 3.2) * Math.sign(x0 || 1);
       const pts = [];
@@ -669,10 +751,14 @@ function init3D() {
         const y = PILLOW_TOP + .004 + Math.sin(t * 5 + ph) * .003 - t2 * t2 * .07 + (t < .15 ? -.012 * (1 - t / .15) : 0);
         pts.push(new THREE.Vector3(x, y, z));
       }
-      const m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 24, rnd(.0022, .0042), 5), strandMat);
-      m.castShadow = true; scene.add(m);
+      strandGeos.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 24, rnd(.0022, .0042), 5));
     }
+    scene.add(mesh(mergeGeometries(strandGeos), strandMat));
   }
+
+  /* Sahne sabit: gölgeler bir kez hesaplanır */
+  renderer.shadowMap.autoUpdate = false;
+  renderer.shadowMap.needsUpdate = true;
 
   /* ---------- kamera hedefleri ---------- */
   head.updateMatrixWorld(true);
@@ -698,6 +784,20 @@ function init3D() {
     $('#markers').appendChild(el); markers.push({ el, pos: W(pt), i });
   }));
 
+  /* Işıkta süzülen toz zerrecikleri */
+  const mouse = { x:0, y:0, tx:0, ty:0 };
+  if (fine) window.addEventListener('pointermove', e => { mouse.tx = e.clientX / window.innerWidth - .5; mouse.ty = e.clientY / window.innerHeight - .5; });
+  const dust = (() => {
+    const N = 140, arr = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) { arr[i*3] = (Math.random() - .5) * 2.6; arr[i*3+1] = .85 + Math.random() * 1.5; arr[i*3+2] = (Math.random() - .35) * 2.8; }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(arr, 3));
+    const c = document.createElement('canvas'); c.width = c.height = 64; const x = c.getContext('2d');
+    const gr = x.createRadialGradient(32, 32, 0, 32, 32, 32); gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = gr; x.fillRect(0, 0, 64, 64);
+    const pts = new THREE.Points(g, new THREE.PointsMaterial({ map:new THREE.CanvasTexture(c), size:.024, transparent:true, opacity:.6, depthWrite:false, color:'#fff6e6' }));
+    scene.add(pts); return pts;
+  })();
+
   /* ---------- döngü ---------- */
   const intro = { k: 1.9 };
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -716,12 +816,20 @@ function init3D() {
     requestAnimationFrame(frame);
     if (!ctl.running) return;
     const t = now / 1000;
+    if (!perf.t0) perf.t0 = now;
+    perf.n++;
+    if (now - perf.t0 > 2000) {
+      const fps = perf.n / ((now - perf.t0) / 1000); perf.n = 0; perf.t0 = now;
+      if (fps < 45 && pr > 1) { pr = Math.max(1, pr - .25); renderer.setPixelRatio(pr); resize(); }
+    }
 
     tgt.set(rig.tx, rig.ty, rig.tz);
     pos.set(rig.px, rig.py, rig.pz).sub(tgt).multiplyScalar(intro.k).add(tgt);
     pos.x += Math.sin(t * .35) * .06 * rig.idle;
     pos.y += Math.sin(t * .27) * .025 * rig.idle;
     pos.z += Math.cos(t * .31) * .05 * rig.idle;
+    mouse.x += (mouse.tx - mouse.x) * .05; mouse.y += (mouse.ty - mouse.y) * .05;
+    pos.x += mouse.x * .22 * rig.idle; pos.y -= mouse.y * .1 * rig.idle;
     camera.position.copy(pos); camera.lookAt(tgt);
 
     camera.fov = 30 * (camera.aspect < 1 ? 1 + (1 - camera.aspect) * .85 : 1);
@@ -730,6 +838,7 @@ function init3D() {
     const br = 1 + Math.sin(t * 1.25) * .007;
     sheet.scale.y = br; sheet.position.y = BED_TOP * (1 - br);
     chest.scale.y = .055 * (1 + Math.sin(t * 1.25) * .03);
+    dust.rotation.y = t * .02; dust.position.y = Math.sin(t * .3) * .04;
 
     markers.forEach(m => {
       const a = hsA[m.i].v; m.ok = false;
@@ -762,7 +871,7 @@ function init3D() {
     renderer.render(scene, camera);
     if (!ctl.ready) {
       ctl.ready = true;
-      const l = $('#loader'); l.style.opacity = 0; setTimeout(() => l.remove(), 800);
+      hideLoader();
     }
   }
   requestAnimationFrame(frame);
@@ -775,9 +884,9 @@ try { poses = init3D(); }
 catch (err) {
   console.error('3D sahne başlatılamadı:', err);
   $('#glwrap').style.display = 'none';
-  $('#loader')?.remove();
+  hideLoader();
 }
-setTimeout(() => $('#loader')?.remove(), 7000);
+setTimeout(hideLoader, 6500);
 
 /* ============================================================
    KAYDIRMA ZAMAN ÇİZELGESİ
@@ -785,18 +894,21 @@ setTimeout(() => $('#loader')?.remove(), 7000);
 const sideX = i => mob() ? 0 : (i % 2 === 0 ? -0.17 : 0.17);   // kart sağdaysa yüz sola kayar
 const sideY = () => mob() ? -0.2 : 0;                          // mobilde kart altta, yüz yukarıda
 
+let snapPts = [0, 1], dirRef = 1;
 const tl = gsap.timeline({
   defaults: { ease:'power2.inOut' },
   scrollTrigger: {
-    trigger:'#story', start:'top top', end:() => '+=' + Math.round(window.innerHeight * 14),
-    pin:true, scrub:1.6, anticipatePin:1, invalidateOnRefresh:true,
+    trigger:'#story', start:'top top', end:() => '+=' + Math.round(window.innerHeight * (mob() ? PACE.mobile : PACE.desktop)),
+    pin:true, scrub: touch ? .15 : true, anticipatePin:1, invalidateOnRefresh:true,
+    snap: false,
     onUpdate: self => {
+      dirRef = self.direction || dirRef;
       const t = self.animation.time();
       let idx = -1;
       steps.forEach((_, i) => { if (t >= self.animation.labels['s' + i] - .01) idx = i; });
       if (self._idx !== idx) {
         self._idx = idx;
-        dots.forEach((d, i) => { d.style.background = i === idx ? '#A8636A' : 'rgba(42,42,45,.25)'; d.style.transform = i === idx ? 'scale(1.6)' : 'scale(1)'; });
+        dots.forEach((d, i) => { d.style.background = i === idx ? '#A8636A' : 'rgba(34,30,29,.25)'; d.style.transform = i === idx ? 'scale(1.6)' : 'scale(1)'; });
         counter.textContent = idx >= 0 ? `${String(idx + 1).padStart(2, '0')} / ${String(steps.length).padStart(2, '0')}` : '';
       }
     }
@@ -822,6 +934,7 @@ steps.forEach((s, i) => {
   tl.fromTo(wraps[i], { autoAlpha:0 }, { autoAlpha:1, duration:.01 }, 's' + i + '+=2.9');
   tl.fromTo(cards[i], { y:30, opacity:0, scale:.97 }, { y:0, opacity:1, scale:1, duration:.8, ease:'power3.out' }, 's' + i + '+=2.9');
   tl.to(lnA[i], { v:1, duration:.9, ease:'power2.out' }, 's' + i + '+=3.5');
+  tl.addLabel('r' + i, 's' + i + '+=4.4');
 
   tl.to({}, { duration:2.2 });   // okuma süresi
 
@@ -841,10 +954,96 @@ tl.set(wraps[steps.length - 1], { autoAlpha:0 }, 'end+=1.1');
 if (poses) tl.to(rig, { ...OUTRO, sx:0, sy:() => mob() ? -0.1 : 0, idle:1, duration:3.6, ease:'sine.inOut' }, 'end');
 tl.to(counter, { opacity:0, duration:.5 }, 'end');
 tl.to('#outro', { autoAlpha:1, duration:.9 }, 'end+=2.4');
+tl.addLabel('o', 'end+=3.8');
 tl.to({}, { duration:1.2 });
+snapPts = [0, ...steps.map((_, i) => tl.labels['r' + i] / tl.duration()), tl.labels.o / tl.duration(), 1];
 
 /* Galeriye girince 3D çizimi durdur (performans) */
-ScrollTrigger.create({ trigger:'#galeri', start:'top bottom', onEnter:() => ctl.running = false, onLeaveBack:() => ctl.running = true });
+ScrollTrigger.create({ trigger:'#yaklasim', start:'top bottom', onEnter:() => ctl.running = false, onLeaveBack:() => ctl.running = true });
+
+/* ============================================================
+   DETAYLAR
+   ============================================================ */
+function splitMask(el) {
+  const words = el.textContent.trim().split(/\s+/);
+  el.innerHTML = words.map(w => `<span class="inline-block overflow-hidden align-bottom pb-[.14em] -mb-[.14em]"><span class="sm-in inline-block">${w}</span></span>`).join(' ');
+  return $$('.sm-in', el);
+}
+['#galeri h2', '#iletisim h2'].forEach(sel => {
+  const el = $(sel), ins = splitMask(el);
+  gsap.from(ins, { yPercent:115, duration:1.1, ease:'power4.out', stagger:.07, scrollTrigger:{ trigger:el, start:'top 88%' } });
+});
+
+const st = $('#statement');
+st.innerHTML = st.textContent.trim().split(/\s+/).map(w => `<span class="sw" style="opacity:.16">${w}</span>`).join(' ');
+gsap.to('.sw', { opacity:1, stagger:.12, ease:'none', scrollTrigger:{ trigger:st, start:'top 82%', end:'bottom 50%', scrub:true } });
+gsap.from('.prin', { y:40, opacity:0, duration:1, ease:'power3.out', stagger:.15, scrollTrigger:{ trigger:'.prin', start:'top 90%' } });
+
+const mrow = steps.map(s => `<span class="mr-12">${s.title}</span><i class="diamond mr-12"></i>`).join('');
+$('#marq').innerHTML = mrow + mrow;
+
+gsap.to('#sp', { scaleX:1, ease:'none', scrollTrigger:{ start:0, end:'max', scrub:.2 } });
+
+if (fine) {
+  $$('header a[href="#iletisim"], #hero a, #outro a, #randevuForm button[type=submit]').forEach(b => {
+    const bx = gsap.quickTo(b, 'x', { duration:.5, ease:'power3' }), by = gsap.quickTo(b, 'y', { duration:.5, ease:'power3' });
+    b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); bx((e.clientX - r.left - r.width / 2) * .25); by((e.clientY - r.top - r.height / 2) * .35); });
+    b.addEventListener('pointerleave', () => { bx(0); by(0); });
+  });
+}
+
+/* ============================================================
+   PREMIUM KATMAN II: detaylar
+   ============================================================ */
+// Menü ve düğme yazıları: üzerine gelince yukarı kayan çift satır
+$$('header nav a, header a[href="#iletisim"], #hero a, #outro a, #randevuForm button[type=submit]').forEach(el => {
+  if (el.children.length) return;
+  const t = el.textContent.trim();
+  el.innerHTML = `<span class="rl"><span>${t}</span><span aria-hidden="true">${t}</span></span>`;
+});
+
+// Menü: tepede şeffaf, kaydırınca buzlu cam; içerikte aşağı inerken saklanır, yukarı çıkarken geri gelir
+{
+  const nav = $('header'), navbg = $('#navbg'); let hidden = false;
+  ScrollTrigger.create({ start:0, end:'max', onUpdate: s => {
+    navbg.style.opacity = s.scroll() > 40 ? 1 : 0;
+    const past = $('#yaklasim').getBoundingClientRect().top < 0;
+    if (past && s.direction === 1 && !hidden) { hidden = true; gsap.to(nav, { yPercent:-110, duration:.55, ease:'power3.inOut' }); }
+    else if ((s.direction === -1 || !past) && hidden) { hidden = false; gsap.to(nav, { yPercent:0, duration:.55, ease:'power3.out' }); }
+  } });
+}
+
+if (!reduceMotion) {
+  // Galeri: ilk görünüşte çizgi sağa sola gezerek sürüklenebileceğini gösterir
+  $$('.ba').forEach((c, i) => {
+    const range = $('.ba-range', c), o = { v: 50 };
+    const set = () => { range.value = o.v; range.dispatchEvent(new Event('input')); };
+    gsap.timeline({ delay: i * .12, scrollTrigger:{ trigger:c, start:'top 78%', once:true } })
+      .to(o, { v:22, duration:.9, ease:'power2.inOut', onUpdate:set })
+      .to(o, { v:78, duration:1.3, ease:'power2.inOut', onUpdate:set })
+      .to(o, { v:50, duration:.9, ease:'power3.out', onUpdate:set });
+  });
+
+  // Alt başlıktaki dev isim harf harf yükselir
+  const bn = $('#bigname');
+  bn.innerHTML = [...bn.textContent].map(ch => `<span class="bn inline-block">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('');
+  gsap.from('.bn', { yPercent:105, duration:1.3, ease:'power4.out', stagger:.04, scrollTrigger:{ trigger:bn, start:'top 95%' } });
+}
+
+if (fine && !reduceMotion) {
+  // Galeri kartları imleci hafifçe takip eder (3B eğim)
+  $$('.ba').forEach(c => {
+    const rx = gsap.quickTo(c, 'rotationX', { duration:.6, ease:'power3' }), ry = gsap.quickTo(c, 'rotationY', { duration:.6, ease:'power3' });
+    gsap.set(c, { transformPerspective:900 });
+    c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 5); rx(-((e.clientY - r.top) / r.height - .5) * 5); });
+    c.addEventListener('pointerleave', () => { rx(0); ry(0); });
+  });
+  // İlke kartlarında imleci izleyen ışık
+  $$('.prin').forEach(p => p.addEventListener('pointermove', e => { const r = p.getBoundingClientRect(); p.style.setProperty('--mx', (e.clientX - r.left + 20) + 'px'); p.style.setProperty('--my', (e.clientY - r.top + 20) + 'px'); }));
+  // İletişim bölümündeki ışık imleci izler
+  const sec = $('#iletisim'), bx = gsap.quickTo('#blob', 'x', { duration:1.2, ease:'power3' }), by = gsap.quickTo('#blob', 'y', { duration:1.2, ease:'power3' });
+  sec.addEventListener('pointermove', e => { const r = sec.getBoundingClientRect(); bx(e.clientX - r.left - 122); by(e.clientY - r.top - 122); });
+}
 
 window.addEventListener('load', () => ScrollTrigger.refresh());
 </script>
